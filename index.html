@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open the Courts, Chicago — Park District Sports Accessibility</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.7.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E85D04;
+      --orange-light: #FFF0E6;
+      --orange-dark: #9C3E02;
+      --court: #1B4332;
+      --court-mid: #2D6A4F;
+      --ink: #1a1a1a;
+      --muted: #555;
+      --bg: #ffffff;
+      --bg2: #f5f5f3;
+      --border: rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--court);
+      color: #fff;
+      padding: 4rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -80px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -50px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(232,93,4,0.12);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 720px; position: relative; z-index: 1; }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: #E85D04; }
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.78);
+      max-width: 540px;
+      margin-bottom: 1.75rem;
+    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+    .badge {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+      border: 0.5px solid rgba(255,255,255,0.2);
+    }
+    .hero-byline {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      border-top: 0.5px solid rgba(255,255,255,0.15);
+      padding-top: 1.25rem;
+    }
+    .hero-byline strong { color: rgba(255,255,255,0.65); font-weight: 500; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0.85rem 2rem;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .nav-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--court);
+      margin-right: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .pill {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .pill:hover {
+      background: var(--bg2);
+      color: var(--ink);
+      border-color: rgba(0,0,0,0.2);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 3rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.4rem;
+    }
+    .section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1.1;
+      margin-bottom: 0.85rem;
+    }
+    .section p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .section p a { color: var(--orange); }
+
+    /* ── STATS ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 1.5rem 0;
+    }
+    .stat-card {
+      background: var(--bg2);
+      border-radius: 10px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+    .stat-card .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-card .desc {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+
+    /* ── VOTE BOX ── */
+    .vote-box {
+      background: var(--court);
+      color: #fff;
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin-top: 1.25rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .vote-box .icon-circle {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(232,93,4,0.2);
+      border: 1px solid rgba(232,93,4,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      color: #E85D04;
+    }
+    .vote-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .vote-box p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+    }
+    .vote-tip {
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      display: inline-block;
+      color: rgba(255,255,255,0.65);
+      margin: 3px 4px 3px 0;
+    }
+
+    /* ── LETTER ── */
+    .letter-box {
+      background: var(--bg2);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem 1.75rem;
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--ink);
+    }
+    .letter-box .field { color: var(--orange); font-weight: 600; }
+    .copy-btn {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 20px;
+      border-radius: 24px;
+      border: 0.5px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .copy-btn:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+    /* ── ACTION STEPS ── */
+    .action-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 1.25rem; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      border-radius: 10px;
+      border: 0.5px solid var(--border);
+    }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--orange);
+      min-width: 28px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .step-body h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+    .step-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin: 0; }
+
+    /* ── PROTEST LIST ── */
+    .protest-list { display: flex; flex-direction: column; gap: 10px; margin-top: 1.25rem; }
+    .protest-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+    }
+    .protest-icon { font-size: 20px; margin-top: 2px; color: var(--orange); flex-shrink: 0; }
+    .protest-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
+    .protest-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin: 0; }
+
+    /* ── ORGS ── */
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 1.25rem;
+    }
+    .org-card {
+      padding: 1.1rem 1.25rem;
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+    }
+    .org-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: var(--ink); }
+    .org-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 9px; }
+    .org-card a { font-size: 0.82rem; color: var(--orange); text-decoration: none; font-weight: 500; }
+    .org-card a:hover { text-decoration: underline; }
+
+    /* ── CONSTITUTION ── */
+    .const-item {
+      padding: 1.1rem 1.25rem;
+      border-radius: 10px;
+      border: 0.5px solid var(--border);
+      margin-bottom: 12px;
+      background: var(--bg);
+    }
+    .const-item h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .const-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--orange-light);
+      color: var(--orange-dark);
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+    .const-item p { font-size: 0.87rem; color: var(--muted); line-height: 1.75; margin: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--court);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+    footer strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--court);
+      color: #fff;
+      padding: 0.65rem 1.4rem;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2.5rem; }
+      .section { padding: 2.5rem 1.25rem; }
+      .nav { padding: 0.75rem 1.25rem; }
+      .vote-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="toast">✓ Letter copied to clipboard!</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">Civics Action Project — Activism Guide</p>
+    <h1>Open the <span>Courts,</span><br>Chicago.</h1>
+    <p>Chicago teens and young adults are driving to the suburbs just to find a gym to play in. Our park district manages over 600 parks — and still can't guarantee youth a place to run. Here's how to change that.</p>
+    <div class="hero-badges">
+      <span class="badge">🏀 Basketball</span>
+      <span class="badge">🏊 Open Gyms</span>
+      <span class="badge">⚽ Community Sports</span>
+      <span class="badge">📍 Chicago, IL</span>
+    </div>
+    <p class="hero-byline">Created by <strong>Eamonn Shingler, Jonas Odean & Patrick Czarniecki</strong> — Civics Class, 2026</p>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">Open Courts Chicago</span>
+  <a class="pill" href="#issue">The Issue</a>
+  <a class="pill" href="#vote">Vote</a>
+  <a class="pill" href="#letter">Write a Letter</a>
+  <a class="pill" href="#petition">Petition</a>
+  <a class="pill" href="#protest">Get Involved</a>
+  <a class="pill" href="#orgs">Organizations</a>
+  <a class="pill" href="#rights">Your Rights</a>
+</nav>
+
+<!-- ISSUE -->
+<section class="section" id="issue">
+  <p class="section-label">The Problem</p>
+  <h2>Why This Matters</h2>
+  <p>The Chicago Park District manages over 600 parks and 270+ facilities across the city — yet accessible, free open gym times for youth basketball and other sports are scarce, inconsistently scheduled, and often require registration fees or membership. Young Chicagoans are leaving the city just to find a place to play.</p>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">600+</div><div class="desc">Chicago parks managed by the district</div></div>
+    <div class="stat-card"><div class="num">77</div><div class="desc">Chicago neighborhoods, many underserved</div></div>
+    <div class="stat-card"><div class="num">$0</div><div class="desc">What open gym time should cost youth</div></div>
+    <div class="stat-card"><div class="num">30+</div><div class="desc">Minutes many teens travel just to find a court</div></div>
+  </div>
+  <p>Lack of accessible recreational space disproportionately affects youth who don't have access to private gyms or clubs. Students from Chicago's North and South sides regularly travel to suburbs like Niles, Skokie, or Evanston simply to find an available gym — a commute that no young person should have to make in a city with hundreds of public facilities.</p>
+  <p>Accessible public sports keeps young people safe, active, and connected to their communities. This is a public health issue, a safety issue, and an equity issue — and the Chicago Park District has both the power and the responsibility to fix it.</p>
+</section>
+
+<!-- VOTE -->
+<section class="section" id="vote">
+  <p class="section-label">Take Action → Vote</p>
+  <h2>Your Vote Shapes Your Parks</h2>
+  <p>The Chicago Park District is overseen by a Board of Commissioners appointed by the Mayor. This means your vote for Mayor and City Council directly influences park funding, hours, and policy. Local elections often have less than 20% voter turnout — which means your vote carries enormous weight.</p>
+  <div class="vote-box">
+    <div class="icon-circle" aria-hidden="true"><i class="ti ti-checkbox"></i></div>
+    <div>
+      <h3>How to Make Your Vote Count for Parks</h3>
+      <p>When you turn 18, register to vote and show up for Chicago municipal elections. Research which mayoral and aldermanic candidates have concrete plans for park funding and youth recreation access — then hold them accountable.</p>
+      <span class="vote-tip">📋 Register at vote.org</span>
+      <span class="vote-tip">🗓 Chicago elections every 4 years</span>
+      <span class="vote-tip">📍 Find your polling place at chicago.gov/vote</span>
+      <span class="vote-tip">🔍 Research candidates' park funding positions</span>
+      <span class="vote-tip">📣 Encourage friends and family to vote too</span>
+    </div>
+  </div>
+  <p style="margin-top:1.25rem">Not 18 yet? You still have a voice. Attend Park District public meetings, advocate on social media, petition your alderperson, and organize in your community — and when you turn 18, vote like parks depend on it, because they do.</p>
+</section>
+
+<!-- LETTER -->
+<section class="section" id="letter">
+  <p class="section-label">Write to a Representative</p>
+  <h2>Email Your Alderperson</h2>
+  <p>Your alderperson represents your ward in Chicago City Council and has direct influence over park budgets and priorities. Find yours at <a href="https://www.chicago.gov/city/en/depts/city_clerk/supp_info/alderman_ward_maps.html" target="_blank">chicago.gov</a>, then copy the template below, fill in the <span style="color:var(--orange);font-weight:600">[brackets]</span>, and send it.</p>
+  <div class="letter-box" id="letter-text">
+    <p><strong>Subject:</strong> Expanding Open Gym Access in Chicago Parks</p>
+    <br>
+    <p>Dear <span class="field">[Alderperson's Name]</span>,</p>
+    <br>
+    <p>My name is <span class="field">[Your Name]</span>, and I am a resident of Ward <span class="field">[Your Ward Number]</span>. I am writing to urge you to advocate for expanded open gym access at Chicago Park District facilities, especially for youth basketball and recreational sports.</p>
+    <br>
+    <p>As a young person in Chicago, I and many of my peers regularly travel outside the city — as far as Niles — simply to find an available gym. This is not acceptable when our city manages over 600 parks. The lack of free, consistent open gym hours means many young Chicagoans are denied access to safe recreational spaces in their own neighborhoods.</p>
+    <br>
+    <p>I am asking you to support the following: (1) Increase the number of free open gym hours at Park District facilities across all wards; (2) Require the Park District to publish and maintain an up-to-date, searchable schedule of open gym times online; and (3) Allocate funding to keep gyms open on evenings and weekends for youth drop-in use at no cost.</p>
+    <br>
+    <p>Accessible recreation is not a luxury — it is a public health and safety issue. I would welcome the opportunity to speak with your office further about this. Thank you for your time and your service to our ward.</p>
+    <br>
+    <p>Sincerely,<br>
+    <span class="field">[Your Full Name]</span><br>
+    <span class="field">[Your Address and Zip Code]</span><br>
+    <span class="field">[Your Email / Phone Number]</span></p>
+  </div>
+  <button class="copy-btn" onclick="copyLetter()">
+    <i class="ti ti-copy" aria-hidden="true"></i> Copy letter to clipboard
+  </button>
+</section>
+
+<!-- PETITION -->
+<section class="section" id="petition">
+  <p class="section-label">Sign & Share</p>
+  <h2>Online Petitions</h2>
+  <p>Petitions show elected officials that a large number of constituents care about an issue. Signatures collected online and delivered in person to a city council meeting or Park District board meeting carry real weight. Here's how to make it happen.</p>
+  <div class="action-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h4>Find existing petitions on Change.org</h4>
+        <p>Search "Chicago Park District equity" or "Chicago open gym access" on Change.org to find and sign active petitions targeting the mayor's office and city council. Share widely — numbers matter.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h4>Create your own petition</h4>
+        <p>Start a petition on Change.org or MoveOn.org addressed directly to the Chicago Park District Board of Commissioners and your alderperson. Collect signatures from classmates, teammates, and neighbors, then deliver them at a board meeting for maximum impact.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h4>Apply social media pressure</h4>
+        <p>Post about your experience — having to leave Chicago to find a gym — and tag your alderperson and <strong>@ChiParkDistrict</strong> on Instagram, X, or TikTok. Public pressure from young people has moved Chicago officials before. Use hashtags like #OpenCourtsChicago and #ChiParks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROTEST -->
+<section class="section" id="protest">
+  <p class="section-label">Show Up</p>
+  <h2>Protest & Civic Engagement</h2>
+  <p>Beyond writing letters, here are concrete, actionable ways to show up and advocate for this issue in person. Showing your face — and bringing others — sends a clear signal to decision makers.</p>
+  <div class="protest-list">
+    <div class="protest-item">
+      <i class="ti ti-building-community protest-icon" aria-hidden="true"></i>
+      <div>
+        <h4>Attend a Chicago Park District Board Meeting</h4>
+        <p>The Park District Board of Commissioners meets publicly and accepts public comment. Show up, sign up to speak for 2 minutes, and share your story. Meeting schedules are posted at <a href="https://www.chicagoparkdistrict.com" target="_blank" style="color:var(--orange)">chicagoparkdistrict.com</a>. Bring a group — multiple voices are louder than one.</p>
+      </div>
+    </div>
+    <div class="protest-item">
+      <i class="ti ti-microphone protest-icon" aria-hidden="true"></i>
+      <div>
+        <h4>Speak at a City Council Budget Hearing</h4>
+        <p>Chicago City Council holds budget hearings every fall. The parks budget is a line item — showing up to speak puts your issue on the public record in front of all 50 alderpersons and gets covered by local press. You don't need an appointment.</p>
+      </div>
+    </div>
+    <div class="protest-item">
+      <i class="ti ti-users protest-icon" aria-hidden="true"></i>
+      <div>
+        <h4>Organize a "Court Day" Rally</h4>
+        <p>Organize a visible demonstration at a local park — invite peers to show up and play, display signs demanding open courts, and invite local journalists. A peaceful, visible show of demand proves the community wants this and creates shareable content that spreads the message further.</p>
+      </div>
+    </div>
+    <div class="protest-item">
+      <i class="ti ti-news protest-icon" aria-hidden="true"></i>
+      <div>
+        <h4>Write to Block Club Chicago or the Tribune</h4>
+        <p>Local journalists cover Park District policy regularly. Reach out to <a href="https://blockclubchicago.org" target="_blank" style="color:var(--orange)">Block Club Chicago</a> with your story, or submit a letter to the editor of the Chicago Tribune. Community stories drive policy coverage and reach audiences beyond social media.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGS -->
+<section class="section" id="orgs">
+  <p class="section-label">Who's Already Fighting</p>
+  <h2>Organizations to Know</h2>
+  <p>These groups are already working on park equity, youth recreation access, and civic advocacy in Chicago. Connect with them — coalition-building amplifies every action on this page.</p>
+  <div class="org-grid">
+    <div class="org-card">
+      <h4>Equiticity</h4>
+      <p>Chicago-based racial equity movement focused on mobility and public space access for communities of color, with strong youth engagement and community organizing programs.</p>
+      <a href="https://www.equiticity.org" target="_blank">equiticity.org ↗</a>
+    </div>
+    <div class="org-card">
+      <h4>Chicago Park District</h4>
+      <p>The official body managing Chicago parks — attending their public meetings and contacting their community liaisons directly is essential for pushing policy change from within the system.</p>
+      <a href="https://www.chicagoparkdistrict.com" target="_blank">chicagoparkdistrict.com ↗</a>
+    </div>
+    <div class="org-card">
+      <h4>Blacks in Green</h4>
+      <p>A green community development organization on Chicago's South Side advocating for equitable green and recreational space in underinvested neighborhoods across the city.</p>
+      <a href="https://blacksingreen.org" target="_blank">blacksingreen.org ↗</a>
+    </div>
+    <div class="org-card">
+      <h4>Metropolitan Planning Council</h4>
+      <p>MPC researches and advocates on Chicago land use and public space policy. Their data on park inequity across neighborhoods is a powerful tool when presenting to officials.</p>
+      <a href="https://www.metroplanning.org" target="_blank">metroplanning.org ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTITUTION -->
+<section class="section" id="rights">
+  <p class="section-label">Your Constitutional Rights</p>
+  <h2>The Constitution Backs You Up</h2>
+  <p>The U.S. Constitution provides multiple foundations for the fight for equitable park and recreation access in Chicago. Here are three key provisions and how they directly tie into this issue.</p>
+
+  <div class="const-item">
+    <h4><span class="const-tag">14th Amendment</span> Equal Protection Clause</h4>
+    <p>The Equal Protection Clause prohibits states and their subdivisions — including city agencies like the Chicago Park District — from denying any person equal protection under the law. When wealthier or predominantly white neighborhoods receive more consistent open gym access, better-maintained courts, and longer operating hours than lower-income or minority-majority neighborhoods, this disparity can constitute unequal treatment by a public agency. Advocates can invoke the 14th Amendment to demand that the Park District demonstrate equitable distribution of recreational resources across all wards and zip codes, regardless of neighborhood income or racial composition. Federal courts have used the Equal Protection Clause in cases involving unequal public services, making this a real legal lever — not just a rhetorical one. When we argue that every Chicago neighborhood deserves equal access to public gyms and courts, we are making a 14th Amendment argument at its core.</p>
+  </div>
+
+  <div class="const-item">
+    <h4><span class="const-tag">1st Amendment</span> Right to Petition & Assemble</h4>
+    <p>The First Amendment guarantees citizens the right to peacefully assemble and to petition the government for a redress of grievances. This directly empowers every action on this guide: attending board meetings, organizing rallies at parks, circulating petitions, and writing letters to elected officials are all constitutionally protected acts. Young people under 18 hold these rights too — age does not restrict First Amendment protections. The government cannot prohibit peaceful civic action aimed at changing public policy, meaning your voice — whether spoken at a city council meeting, posted online, or expressed in a rally at a park — is protected at the highest level of law in the country. Showing up and speaking out is not just strategy; it is your constitutional right.</p>
+  </div>
+
+  <div class="const-item">
+    <h4><span class="const-tag">Preamble</span> Promote the General Welfare</h4>
+    <p>The Preamble to the Constitution establishes that one core purpose of government is to "promote the general welfare" of its citizens. Public parks, open gyms, and recreational facilities are a direct expression of this principle — they serve the physical and mental health of the community, reduce youth violence, and support social cohesion across neighborhoods. When public recreation infrastructure is defunded, inaccessibly scheduled, or inequitably distributed, the government is arguably failing its foundational obligation to promote the welfare of all residents — not just those who can afford private facilities. This framing is especially powerful when advocating to state or federal representatives for park funding, where the general welfare clause has historically justified broad government investment in public infrastructure.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Open the Courts, Chicago</strong></p>
+  <p>An Activism Guide for Park District Sports Accessibility</p>
+  <p style="margin-top:0.5rem">Created by Eamonn Shingler, Jonas Odean & Patrick Czarniecki &mdash; Civics Class, 2026</p>
+</footer>
+
+<script>
+  function copyLetter() {
+    const el = document.getElementById('letter-text');
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      showToast();
+    }).catch(function () {
+      const range = document.createRange();
+      range.selectNode(el);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      showToast();
+    });
+  }
+
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.style.opacity = '1';
+    setTimeout(function () { t.style.opacity = '0'; }, 2400);
+  }
+</script>
+
+</body>
+</html>
